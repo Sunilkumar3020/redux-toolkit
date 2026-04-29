@@ -1,13 +1,30 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { decrement, increment, incrementByAmount } from "./counterSlice"
 
 export default function Counter() {
     const count = useSelector((state) => state.counter)
-    console.log(count)
+    const dispatch = useDispatch()
+
+
+    // handleIncrement
+    const handleIncrement = e => {
+        dispatch(increment())
+    }
+
+    // handleDecrement
+    const handleDecrement = e => {
+        dispatch(decrement())
+    }
+    // handleIncrementByAmount
+    const handleIncrementByAmount = () => {
+        dispatch(incrementByAmount(10))
+    }
     return (
         <>
-            <h2>{ }</h2>
-            <button>Increment +</button>
-            <button>Decrement -</button>
+            <h2>{count.value}</h2>
+            <button onClick={handleIncrement} >Increment +</button>
+            <button onClick={handleDecrement}>Decrement -</button>
+            <button onClick={handleIncrementByAmount}>Increment by Amount</button>
         </>
     )
 }
